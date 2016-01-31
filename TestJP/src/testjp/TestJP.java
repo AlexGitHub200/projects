@@ -38,8 +38,12 @@ public class TestJP {
         for (Stock st : listData) {
             st.calcDivident();
             st.calcPeRatio();
+            
+            System.out.println("Stock ("+st.getSymbol()+ ") Yield ("+ st.getDyield()+ ") P/E ratio ("+ st.getPeratio()+")" );
         }
 
+        
+        
         HashSet<Trade> stockset = new HashSet<Trade>();
 
         readTradeData(stockset);
@@ -89,13 +93,13 @@ public class TestJP {
                 item.setTprice(Integer.parseInt(a[5]));
                 listData.add(item);
 
-                int i = 0;
-                for (String s : a) {
-
-                    System.out.println("a[" + i + "]= " + s);
-                    i++;
-
-                }
+//                int i = 0;
+//                for (String s : a) {
+//
+//                    System.out.println("a[" + i + "]= " + s);
+//                    i++;
+//
+//                }
                 line = br.readLine();
 
             }
@@ -135,13 +139,13 @@ public class TestJP {
                 item.setTimestamp(dt.parse(a[4]));
                 listData.add(item);
 
-                int i = 0;
-                for (String s : a) {
-
-                    System.out.println("a[" + i + "]= " + s);
-                    i++;
-
-                }
+//                int i = 0;
+//                for (String s : a) {
+//
+//                    System.out.println("a[" + i + "]= " + s);
+//                    i++;
+//
+//                }
                 line = br.readLine();
 
             }
