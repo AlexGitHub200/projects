@@ -6,6 +6,7 @@
 
 package testjp;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,19 +21,23 @@ public class TradeHelper {
     
     
     public  HashMap<String, Double> calcStockPrice(HashSet<Trade> stockset) {
-
+        
+        Date now = new Date();
         HashMap<String, Helpersum> stockPriceHelper = new HashMap<String, Helpersum>();
 
         for (Trade stock : stockset) {
 
             Helpersum item = new Helpersum();
             double d = stock.getPrice() * stock.getShareq();
-
+            //Check if in past 15 min from now
+            if(now.getTime() - stock.getTimestamp().getTime() > 15*60*1000)
+                continue;
+            
             if (stockPriceHelper.get(stock.getSymbol()) == null) {
                 item.setPriceq(d);
                 item.setSumquantity(stock.getShareq());
                 stockPriceHelper.put(stock.getSymbol(), item);
-            } else {
+            } else {              
                 item.setPriceq(stockPriceHelper.get(stock.getSymbol()).getPriceq() + d);
                 item.setSumquantity(stockPriceHelper.get(stock.getSymbol()).getSumquantity() + stock.getShareq());
                 stockPriceHelper.put(stock.getSymbol(), item);
