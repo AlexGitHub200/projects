@@ -135,7 +135,7 @@ public class TestJP {
 
                 item.setPrice(Double.parseDouble(a[3]));
 
-                SimpleDateFormat dt = new SimpleDateFormat("YYYY/MM/DD/hh/mm");
+                SimpleDateFormat dt = new SimpleDateFormat("yyyy/MM/dd/hh/mm");             
                 item.setTimestamp(dt.parse(a[4]));
                 listData.add(item);
 
