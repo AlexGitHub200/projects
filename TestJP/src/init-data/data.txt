@@ -1,0 +1,5 @@
+TEA,Common,0,,100,30
+POP,Common,8,,100,12
+ALE,Common,23,,60,46
+GIN,Prefered,8,2,100,14
+JOE,Common,13,,250,26
