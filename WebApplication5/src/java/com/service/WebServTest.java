@@ -6,14 +6,18 @@
 package com.service;
 
 import com.entity.Employee;
+import com.queue.QueueSend;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
+import javax.jms.JMSException;
 import javax.jws.WebService;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -30,10 +34,13 @@ import javax.persistence.criteria.Root;
 @WebService
 public class WebServTest {
 
+    @EJB
+    private QueueSend queueSend;
+
     @PersistenceContext(unitName = "WebApplication5PU")
     private EntityManager em;
 
-    public String insertEmp(String name) {
+    public String insertEmp(String name) throws JMSException, NamingException {
 
         Employee emp = new Employee();
         emp.setName(name);
@@ -49,11 +56,17 @@ public class WebServTest {
         } else {
             result = " not created";
         }
-
+      
         return "Employee " + name + result;
 
     }
-
+    
+public String sendToJms(String message) throws JMSException, NamingException{
+     queueSend.sendJMSMessageToTestJMSQueue(message + " is created");
+     
+     return "sent";
+    
+}
 //    void persist(Object object) {
 //        em.persist(object);
 //    }
