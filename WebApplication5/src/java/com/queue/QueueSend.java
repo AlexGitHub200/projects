@@ -5,17 +5,16 @@
  */
 package com.queue;
 
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageProducer;
+import javax.jms.Queue;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.naming.Context;
@@ -30,9 +29,12 @@ import javax.naming.NamingException;
 public class QueueSend {
 
     
-//    @Resource(mappedName="jms/TestJMSQueue")
-//    private Queue queue;
-//    
+    @Resource(mappedName="TestJMSQueue")
+    private Queue queue;
+    
+    @Resource(mappedName="AlexConnectionFactory")
+    private ConnectionFactory cf;
+    
     private Message createJMSMessageFortestJMSQueue(Session session, Object messageData) throws JMSException {
         // TODO create and populate message to send
         TextMessage tm = session.createTextMessage();
@@ -42,15 +44,15 @@ public class QueueSend {
 
     public void sendJMSMessageToTestJMSQueue(Object messageData) throws JMSException, NamingException {
         Context c = new InitialContext();
-        ConnectionFactory cf = (ConnectionFactory) c.lookup("java:comp/env/AlexConnectionFactory");
+        //ConnectionFactory cf = (ConnectionFactory) c.lookup("java:comp/env/AlexConnectionFactory");
         Connection conn = null;
         Session s = null;
         try {
             conn = cf.createConnection();
             s = conn.createSession(false, s.AUTO_ACKNOWLEDGE);
             
-            Destination destination = (Destination) c.lookup("java:comp/env/TestJMSQueue");
-            MessageProducer mp = s.createProducer(destination);
+            //Destination destination = (Destination) c.lookup("java:comp/env/TestJMSQueue");
+            MessageProducer mp = s.createProducer(queue);
             mp.send(createJMSMessageFortestJMSQueue(s, messageData));
         } finally {
             if (s != null) {
