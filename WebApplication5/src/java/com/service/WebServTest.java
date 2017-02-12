@@ -34,8 +34,7 @@ import javax.persistence.criteria.Root;
 @WebService
 public class WebServTest {
 
-    @EJB
-    private QueueSend queueSend;
+   
 
     @PersistenceContext(unitName = "WebApplication5PU")
     private EntityManager em;
@@ -51,7 +50,7 @@ public class WebServTest {
         em.persist(emp);
 
         String result;
-        if (findemp(name).isEmpty() == false) {
+        if (findemp(name).isEmpty() == false) { 
             result = " created";
         } else {
             result = " not created";
@@ -61,12 +60,7 @@ public class WebServTest {
 
     }
     
-public String sendToJms(String message) throws JMSException, NamingException{
-     queueSend.sendJMSMessageToTestJMSQueue(message + " is created");
-     
-     return "sent";
-    
-}
+
 //    void persist(Object object) {
 //        em.persist(object);
 //    }

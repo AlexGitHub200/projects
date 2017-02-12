@@ -43,7 +43,7 @@ public class QueueSend {
     }
 
     public void sendJMSMessageToTestJMSQueue(Object messageData) throws JMSException, NamingException {
-        Context c = new InitialContext();
+       // Context c = new InitialContext();
         //ConnectionFactory cf = (ConnectionFactory) c.lookup("java:comp/env/AlexConnectionFactory");
         Connection conn = null;
         Session s = null;

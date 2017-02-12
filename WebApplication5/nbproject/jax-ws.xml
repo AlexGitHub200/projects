@@ -4,6 +4,9 @@
     <service name="WebServTest">
       <implementation-class>com.service.WebServTest</implementation-class>
     </service>
+    <service name="WsJmsBean">
+      <implementation-class>com.service.WsJmsBean</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

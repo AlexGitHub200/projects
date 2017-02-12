@@ -21,4 +21,34 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <resource-ref>
+        <res-ref-name>com.oracle.webservices.api.jms.ErrorQueueFactory</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <resource-ref>
+        <res-ref-name>AlexConnectionFactory</res-ref-name>
+        <res-type>javax.jms.ConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <message-destination-ref>
+        <message-destination-ref-name>com.oracle.webservices.api.jms.ErrorQueue</message-destination-ref-name>
+        <message-destination-type>javax.jms.Queue</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
+        <message-destination-link>com.oracle.webservices.api.jms.ErrorQueue</message-destination-link>
+    </message-destination-ref>
+    <message-destination-ref>
+        <message-destination-ref-name>com.queue</message-destination-ref-name>
+        <message-destination-type>javax.jms.Queue</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
+        <message-destination-link>com.queue</message-destination-link>
+    </message-destination-ref>
+    <message-destination-ref>
+        <message-destination-ref-name>TestJMSQueue</message-destination-ref-name>
+        <message-destination-type>javax.jms.Queue</message-destination-type>
+        <message-destination-usage>Produces</message-destination-usage>
+        <message-destination-link>TestJMSQueue</message-destination-link>
+    </message-destination-ref>
 </web-app>

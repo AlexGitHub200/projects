@@ -44,8 +44,9 @@ public abstract class AbstractFacade<T> {
     }
 
     public List<T> findAll() {
-       // javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-       // cq.select(cq.from(entityClass));
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(entityClass));
+        //javax.persistence.Query q = getEntityManager().createQuery(cq);
          TypedQuery query=em.createNamedQuery("findall.employee", Employee.class);
         return query.getResultList();
     }
