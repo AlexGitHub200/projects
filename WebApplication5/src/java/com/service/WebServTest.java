@@ -6,12 +6,11 @@
 package com.service;
 
 import com.entity.Employee;
-import com.queue.QueueSend;
+import com.entity.Employee_;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
@@ -23,7 +22,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
+import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Root;
 
 /**
@@ -91,7 +90,7 @@ public class WebServTest {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Employee> createQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> emp = createQuery.from(Employee.class);
-        createQuery.select(emp).where(criteriaBuilder.equal(emp.get("name"), name));
+        createQuery.select(emp).where(criteriaBuilder.equal(emp.get(Employee_.name), name));// use CM instead of just a string!
         //createQuery.select(emp);
 
         TypedQuery<Employee> q = em.createQuery(createQuery);
