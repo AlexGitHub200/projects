@@ -7,11 +7,15 @@
 package com.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 
@@ -23,6 +27,18 @@ import javax.persistence.Temporal;
 @Entity
 public class Employee implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    @OneToMany(orphanRemoval=true,cascade=CascadeType.PERSIST)
+    @JoinColumn // to create a foreign key in Adress, otherwise we have a join table
+    Collection<Adress> adressList;
+
+    public Collection<Adress> getAdressList() {
+        return adressList;
+    }
+
+    public void setAdressList(Collection<Adress> adressList) {
+        this.adressList = adressList;
+    }
     //@Id
     //@TableGenerator(allocationSize=1)
     //@GeneratedValue(strategy = GenerationType.AUTO)
