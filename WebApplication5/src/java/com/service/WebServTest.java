@@ -5,10 +5,12 @@
  */
 package com.service;
 
+import com.entity.Adress;
 import com.entity.Employee;
 import com.entity.Employee_;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -22,7 +24,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Root;
 
 /**
@@ -44,9 +45,15 @@ public class WebServTest {
         emp.setName(name);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
-
+        Adress addr = new Adress();
+        addr.setTypeOfAdress("home");
+        addr.setStreet("terzopoulou 12");
+        ArrayList<Adress> addrlist = new ArrayList<>(); 
+        addrlist.add(addr);
+        emp.setAdressList(addrlist);
         emp.setCreationdate(date);
         em.persist(emp);
+        //em.getTransaction().begin();
 
         String result;
         if (findemp(name).isEmpty() == false) { 
