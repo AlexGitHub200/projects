@@ -5,6 +5,7 @@
  */
 package com.queue;
 
+import java.util.*;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
