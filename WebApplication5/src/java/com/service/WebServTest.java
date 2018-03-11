@@ -7,7 +7,7 @@ package com.service;
 
 import com.entity.Adress;
 import com.entity.Employee;
-import com.entity.Employee_;
+//import com.entity.Employee_;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,7 +66,7 @@ public class WebServTest {
 
     }
     
-
+    
 //    void persist(Object object) {
 //        em.persist(object);
 //    }
@@ -76,7 +76,7 @@ public class WebServTest {
         //Employee emp = new Employee();
         ////emp.setName(name);
         TypedQuery query = em.createQuery("SELECT e FROM Employee e where e.name like :custName",
-                Employee.class).setParameter("custName", name);
+                Employee.class).setParameter("custName", "%"+name+"%");
 
         //emp = em.find(Employee.class, new Long(1));
         //System.out.print("the id is" + emp.getId() + " the name is " + emp.getName());
@@ -92,13 +92,20 @@ public class WebServTest {
         TypedQuery query = em.createNamedQuery("findall.employee", Employee.class);
         return query.getResultList();
     }
+    
+//    @TransactionAttribute(NOT_SUPPORTED)
+//    public List<String> findAllNames(){
+//        TypedQuery query = em.createNamedQuery("findall.employeeNames",String.class);
+//        
+//        return query.getResultList();
+//    }
 
     public List<Employee> findAllCriteria(String name) {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Employee> createQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> emp = createQuery.from(Employee.class);
-        createQuery.select(emp).where(criteriaBuilder.equal(emp.get(Employee_.name), name));// use CM instead of just a string!
-        //createQuery.select(emp);
+        //createQuery.select(emp).where(criteriaBuilder.equal(emp.get(Employee_.name), name));// use CM instead of just a string!
+        createQuery.select(emp);
 
         TypedQuery<Employee> q = em.createQuery(createQuery);
         return q.getResultList();
