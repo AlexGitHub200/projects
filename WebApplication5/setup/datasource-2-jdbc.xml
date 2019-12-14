@@ -2,16 +2,16 @@
 <jdbc-data-source xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source">
   <name>AlexDB</name>
   <jdbc-driver-params>
-    <url>jdbc:derby://localhost:1527/AlexDB</url>
+    <url>jdbc:derby://localhost:1527/NewDB</url>
     <driver-name>org.apache.derby.jdbc.ClientDriver</driver-name>
     <properties>
       <property>
         <name>user</name>
-        <value>test4</value>
+        <value>test3</value>
       </property>
       <property>
         <name>password</name>
-        <value>test4</value>
+        <value>test3</value>
       </property>
     </properties>
   </jdbc-driver-params>
