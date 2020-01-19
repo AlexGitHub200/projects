@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.entity;
 
 import java.io.Serializable;
@@ -23,12 +22,13 @@ import javax.persistence.Temporal;
  *
  * @author alex
  */
-@NamedQuery(name="findall.employee",query="select e from Employee e")
+@NamedQuery(name = "findall.employee", query = "select e from Employee e")
 @Entity
 public class Employee implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
-    @OneToMany(orphanRemoval=true,cascade=CascadeType.PERSIST)
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.PERSIST)
     @JoinColumn // to create a foreign key in Adress, otherwise we have a join table
     Collection<Adress> adressList;
 
@@ -42,10 +42,11 @@ public class Employee implements Serializable {
     //@Id
     //@TableGenerator(allocationSize=1)
     //@GeneratedValue(strategy = GenerationType.AUTO)
-   //@SequenceGenerator(name="Emp_Gen", sequenceName="Emp_Seq",allocationSize=1,initialValue=65)
+    //@SequenceGenerator(name="Emp_Gen", sequenceName="Emp_Seq",allocationSize=1,initialValue=65)
     //@GeneratedValue(generator="Emp_Gen",strategy = GenerationType.SEQUENCE)
-    @TableGenerator(name="Emp_Gen",allocationSize=1)
-@Id @GeneratedValue(generator="Emp_Gen")
+    @TableGenerator(name = "Emp_Gen", allocationSize = 1)
+    @Id
+    @GeneratedValue(generator = "Emp_Gen")
     private Long id;
     private String name;
 
@@ -56,8 +57,7 @@ public class Employee implements Serializable {
     public void setCreationdate(Date creationdate) {
         this.creationdate = creationdate;
     }
-    
-    
+
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date creationdate;
 
@@ -68,6 +68,7 @@ public class Employee implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public Long getId() {
         return id;
     }
@@ -96,11 +97,9 @@ public class Employee implements Serializable {
         return true;
     }
 
-    
-    
     @Override
     public String toString() {
         return "com.entity.Employee[ id=" + id + " ]";
     }
-    
+
 }
